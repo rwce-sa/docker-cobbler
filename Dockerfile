@@ -1,6 +1,6 @@
 FROM centos:7.2.1511
 
-MAINTAINER thijs.schnitger@container-solutions.com
+MAINTAINER Frederic Masi
 
 RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); \
 rm -f /lib/systemd/system/multi-user.target.wants/*;\
