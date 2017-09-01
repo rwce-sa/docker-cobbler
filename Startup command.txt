@@ -1,0 +1,45 @@
+# Directly from inside docker-machine Docker
+
+docker run -d --privileged --net host \
+-v /mnt/sda1/tmp/docker-cobbler/var/www/cobbler/images:/var/www/cobbler/images \
+-v /mnt/sda1/tmp/docker-cobbler/var/www/cobbler/ks_mirror:/var/www/cobbler/ks_mirror \
+-v /mnt/sda1/tmp/docker-cobbler/var/www/cobbler/links:/var/www/cobbler/links \
+-v /mnt/sda1/tmp/docker-cobbler/var/lib/cobbler/config:/var/lib/cobbler/config \
+-v /mnt/sda1/tmp/docker-cobbler/var/lib/tftpboot:/var/lib/tftpboot \
+-v /mnt/sda1/iso:/mnt:ro \
+-p 69:69 \
+-p 80:80 \
+-p 443:443 \
+-p 25151:25151 \
+--name cobbler fmasi/cobbler
+
+# From ubuntu vm
+docker run -d --privileged --net host \
+-v /home/fmasi/cobbler/var/www/cobbler/images:/var/www/cobbler/images \
+-v /home/fmasi/cobbler/var/www/cobbler/ks_mirror:/var/www/cobbler/ks_mirror \
+-v /home/fmasi/cobbler/var/www/cobbler/links:/var/www/cobbler/links \
+-v /home/fmasi/cobbler/var/lib/cobbler/config:/var/lib/cobbler/config \
+-v /home/fmasi/cobbler/var/lib/tftpboot:/var/lib/tftpboot \
+-v /mnt:/mnt:ro \
+-p 69:69 \
+-p 80:80 \
+-p 443:443 \
+-p 25151:25151 \
+--name cobbler fmasi/cobbler
+
+# From Windows via docker for windows
+docker run -d --privileged --net host \
+-v C:/Users/fmasi/GIT/docker-cobbler/var/www/cobbler/images:/var/www/cobbler/images \
+-v C:/Users/fmasi/GIT/docker-cobbler/var/www/cobbler/ks_mirror:/var/www/cobbler/ks_mirror \
+-v C:/Users/fmasi/GIT/docker-cobbler/var/www/cobbler/links:/var/www/cobbler/links \
+-v C:/Users/fmasi/GIT/docker-cobbler/var/lib/cobbler/config:/var/lib/cobbler/config \
+-v C:/Users/fmasi/GIT/docker-cobbler/var/lib/tftpboot:/var/lib/tftpboot \
+-v D:/:/mnt:ro \
+-p 69:69 \
+-p 80:80 \
+-p 443:443 \
+-p 25151:25151 \
+--name cobbler fmasi/cobbler
+
+# Importing images
+docker exec -it cobbler cobbler import --name=centos7 --arch=x86_64 --path=/mnt
