@@ -28,18 +28,7 @@ docker run -d --privileged --net host \
 --name cobbler fmasi/cobbler
 
 # From Windows via docker for windows
-docker run -d --privileged --net host \
--v C:/Users/fmasi/GIT/docker-cobbler/var/www/cobbler/images:/var/www/cobbler/images \
--v C:/Users/fmasi/GIT/docker-cobbler/var/www/cobbler/ks_mirror:/var/www/cobbler/ks_mirror \
--v C:/Users/fmasi/GIT/docker-cobbler/var/www/cobbler/links:/var/www/cobbler/links \
--v C:/Users/fmasi/GIT/docker-cobbler/var/lib/cobbler/config:/var/lib/cobbler/config \
--v C:/Users/fmasi/GIT/docker-cobbler/var/lib/tftpboot:/var/lib/tftpboot \
--v D:/:/mnt:ro \
--p 69:69 \
--p 80:80 \
--p 443:443 \
--p 25151:25151 \
---name cobbler fmasi/cobbler
+docker run -d --privileged --net host -v C:/Users/fmasi/GIT/docker-cobbler/var/www/cobbler/images:/var/www/cobbler/images -v C:/Users/fmasi/GIT/docker-cobbler/var/www/cobbler/ks_mirror:/var/www/cobbler/ks_mirror -v C:/Users/fmasi/GIT/docker-cobbler/var/www/cobbler/links:/var/www/cobbler/links -v C:/Users/fmasi/GIT/docker-cobbler/var/lib/cobbler/config:/var/lib/cobbler/config -v C:/Users/fmasi/GIT/docker-cobbler/var/lib/tftpboot:/var/lib/tftpboot -v D:/:/mnt:ro -p 69:69 -p 80:80 -p 443:443 -p 25151:25151 --name cobbler fmasi/cobbler
 
 # Importing images
 docker exec -it cobbler cobbler import --name=centos7 --arch=x86_64 --path=/mnt
